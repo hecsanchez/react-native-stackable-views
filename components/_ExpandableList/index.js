@@ -37,9 +37,10 @@ export class ExpandableList extends React.Component {
       updateLayout = index => {
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         const array = [...this.state.items];
+        
         array.map((value, placeindex) =>
           placeindex === index
-            ? (array[placeindex]['isExpanded'] = !array[placeindex]['isExpanded'])
+            ? (array[placeindex]['isExpanded'] = true)
             : (array[placeindex]['isExpanded'] = false)
         );
     
@@ -48,7 +49,7 @@ export class ExpandableList extends React.Component {
     
       render() {
         const { items } = this.state;
-        const { onSettingsPress, total } = this.props;
+        const { onSettingsPress, total, onSelect } = this.props;
         
         return (
           <View>
@@ -56,6 +57,7 @@ export class ExpandableList extends React.Component {
                 {items && items.map((item, key) => (
                     <ExpandableView
                         onToggle={this.updateLayout.bind(this, key)}
+                        onSelect={onSelect}
                         item={item}
                         index={key}
                         onSettingsPress={onSettingsPress}

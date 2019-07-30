@@ -2,25 +2,29 @@ import styled from "styled-components/native";
 import { screenWidth } from "app/helpers/measurements";
 import { colors } from "./utils";
 
-export const CardTheme = styled.View`
+export const CardTheme = styled.TouchableOpacity`
     background: #ffffff;
     width: ${screenWidth - 80};
     margin-left: 20px;
     margin-top: 20px;
     margin-bottom: 70px;
     height: 300px;
-    box-shadow: 0 0 15px #d4d2d2;
+    box-shadow: ${props=>props.isSelected ? 'none' : '0 0 15px #d4d2d2' };
     border-radius: 20px;
+    border: 1px solid;
+    border-color: ${props=>props.isSelected ? '#5acbcb' : 'transparent'}
 `;
 
 export const SmallCard = styled.View`
-background: #ffffff;
-width: ${screenWidth - 80};
-margin-left: 20px;
-margin-top: 20px;
-height: 150px;
-box-shadow: 0 0 15px #d4d2d2;
-border-radius: 20px;
+    background: #ffffff;
+    width: ${screenWidth - 80};
+    margin-left: 20px;
+    margin-top: 20px;
+    height: 150px;
+    box-shadow: ${props=>props.isSelected ? 'none' : '0 0 15px #d4d2d2' };
+    border-radius: 20px;
+    border: 1px solid;
+    border-color: ${props=>props.isSelected ? '#5acbcb' : 'transparent'}
 `;
 
 export const CardImage = styled.ImageBackground`

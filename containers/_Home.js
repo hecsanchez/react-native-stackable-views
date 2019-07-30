@@ -9,6 +9,7 @@ import {
 import Icon from 'react-native-vector-icons/FontAwesome';
 import AntIcon from 'react-native-vector-icons/AntDesign';
 import SimpleLineIcon from 'react-native-vector-icons/SimpleLineIcons';
+import AsyncStorage from '@react-native-community/async-storage';
 
 import { ExpandableList } from 'app/components';
 import { itinerary } from 'app/data';
@@ -29,8 +30,18 @@ export class Home extends React.Component {
         
         this.state = {
             isModalVisible: false,
-            isBookmarked: false
+            isBookmarked: false,
+            selectedCards: {
+                hotel: '',
+                car: '',
+                flight: ''
+            }
         };
+    }
+
+    async componentDidMount() {
+        const value = await AsyncStorage.getItem('selectedCards');
+        console.log('value', value);
     }
 
     toggleModal = (show) => {
@@ -41,6 +52,28 @@ export class Home extends React.Component {
         this.setState((prevState) => ({
             isBookmarked: !prevState.isBookmarked
         }));
+    }
+
+    setSelectedCards = () => {
+        const options = itinerary.sections.map(section=>{
+            const filteredSection = Object.assign({}, section);
+            filteredSection.type = section.key;
+            return section.options;
+        });
+
+        options.filter(option=>{
+
+        });
+
+    }
+
+    onSelect = async(id, type) => {
+        const newSelection = {
+            ...this.state.selectedCards,
+            [type]: id,
+        };
+        this.setState({ selectedCards: newSelection});
+        await AsyncStorage.setItem('selectedCards', newSelection);
     }
     
     render() {
@@ -69,14 +102,13 @@ export class Home extends React.Component {
                                     }
                                 </BookmarkContainer>
                             </Column>
-                        </Row>
-                        
-                        
+                        </Row>                        
                     </HeaderIntroTheme>
                     <ExpandableList 
                         total={itinerary.total}
                         data={itinerary.sections}
                         onSettingsPress={this.toggleModal}
+                        onSelect={this.onSelect}
                     />
                 </HomeTheme>
                 <Modal

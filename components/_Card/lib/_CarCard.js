@@ -18,7 +18,7 @@ import {
 
 export const CarCard = (props) => {
     return(
-        <CardTheme>
+        <CardTheme onPress={()=>props.onSelect(props.id, 'car')} isSelected={props.isSelected}>
             <CardImage
                 source={{uri: props.image}}
             />

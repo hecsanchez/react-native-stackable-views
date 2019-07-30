@@ -6,7 +6,7 @@ import {
 import { CardTheme, CardImage, CardContent, Title } from 'app/styled';
 
 export const HotelCard = (props) => (
-    <CardTheme>
+    <CardTheme onPress={()=>props.onSelect(props.id, 'hotel')} isSelected={props.isSelected}>
         <CardImage
             source={{uri: props.image}}
         />

@@ -3,20 +3,21 @@ import {
     Image,
     Text,
     View,
+    TouchableOpacity
   } from 'react-native';
 import { SmallCard, CardImage } from 'app/styled';
 
 export const FlightCard = (props) => (
-    <View>
-        <SmallCard>       
+    <TouchableOpacity onPress={()=>props.onSelect(props.id, 'flight')}>
+        <SmallCard isSelected={props.isSelected}>       
             <Text>
                 Test
             </Text>
         </SmallCard>
-        <SmallCard>       
+        <SmallCard isSelected={props.isSelected}>       
             <Text>
                 Test
             </Text>
         </SmallCard>
-    </View>
+    </TouchableOpacity>
 );
