@@ -2,16 +2,21 @@ import React, { Component } from 'react';
 import {
     Image,
     Text,
+    View,
   } from 'react-native';
-import { CardTheme, CardImage } from 'app/styled';
+import { SmallCard, CardImage } from 'app/styled';
 
 export const FlightCard = (props) => (
-        <CardTheme>
-            <Image
-                source={{uri: props.image}}
-            />            
+    <View>
+        <SmallCard>       
             <Text>
                 Test
             </Text>
-        </CardTheme>
+        </SmallCard>
+        <SmallCard>       
+            <Text>
+                Test
+            </Text>
+        </SmallCard>
+    </View>
 );

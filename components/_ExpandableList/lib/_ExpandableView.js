@@ -7,10 +7,22 @@ import {
   UIManager,
   TouchableOpacity,
   Dimensions,
+  Button
 } from 'react-native';
-import { ExpandableViewTheme, ExpandableHeaderTheme, ExpandableContentTheme } from 'app/styled';
+import Icon from 'react-native-vector-icons/FontAwesome';
+import { 
+  ExpandableViewTheme,
+  ExpandableHeaderTheme,
+  ExpandableContentTheme,
+  ExpandableTitle,
+  Row,
+  Column,
+  IconContainer,
+  Filter
+} from 'app/styled';
 import { Card } from 'app/components';
-const { width } = Dimensions.get('window');
+const { width, height } = Dimensions.get('window');
+const contentHeight = height - 380;
 
 export class ExpandableView extends Component {
   constructor() {
@@ -19,8 +31,13 @@ export class ExpandableView extends Component {
       height: 0,
     };
   }
+  componentDidMount() {
+    if (this.props.item && this.props.item.isExpanded) {
+      this.setState({ height: height - 380 });
+    }
+  }
   componentWillReceiveProps(nextProps) {
-      const height = nextProps.item.isExpanded ? null : 0;
+      const height = nextProps.item && nextProps.item.isExpanded ? contentHeight : 0;
       this.setState({ height });
   }
   shouldComponentUpdate(nextProps, nextState) {
@@ -31,24 +48,76 @@ export class ExpandableView extends Component {
   }
 
   render() {
-      const { item, index } = this.props;
-      console.log('this.state.height', this.state.height);
+    const { total, item, index, onSettingsPress } = this.props;
+
     return (
         <ExpandableViewTheme>
             <ExpandableHeaderTheme
                 activeOpacity={0.8}
-                onPress={this.props.onToggle}
+                onPress={item && this.props.onToggle}
                 index={index}
             >
-                <Text>{item.key}</Text>
+              <Row>
+                { item ?
+                  <>
+                    <Column width={5}></Column>
+                    <Column width={10}>
+                      <Icon name={item && item.icon} size={17} color="#989db1" />
+                    </Column>
+                    <Column width={15}>
+                      <ExpandableTitle>{item && item.key}</ExpandableTitle>
+                    </Column>
+                    <Column width={40}>
+                      <Text>{item && item.description}</Text>
+                    </Column>
+                    <Column width={20}>
+                      <Text>C${item && item.price}</Text>
+                    </Column>
+                    <Column width={10} alignText="right">
+                      <IconContainer
+                        onPress={()=>onSettingsPress(true)}
+                      >
+                        <Icon name="ellipsis-v" size={15} color="#515c6b" />
+                      </IconContainer>
+                    </Column>
+                  </>
+                  :
+                  <>
+                    <Column width={5}></Column>
+                    <Column width={65}>
+                      <Text>Trip Overview</Text>
+                    </Column>
+                    <Column width={20}>
+                      <Text>C${total}</Text>
+                    </Column>
+                    <Column width={10} alignText="right">
+                    </Column>
+                  </>
+                }
+                
+              </Row>
             </ExpandableHeaderTheme>
-            <ExpandableContentTheme style={{
-                height: this.state.height,
-            }}>
+            <ExpandableContentTheme 
+              style={{
+                height: this.state.height
+              }}
+              index={index}
+            >
+              <Row>
+                { item && item.filters.map(filter=>{
+                  const colWidth = 100 / item.filters.length;
+
+                  return (
+                    <Column width={colWidth}>
+                      <Filter>{filter}</Filter>
+                    </Column>
+                  );
+                })}
+              </Row>
                 <ScrollView 
                  horizontal= {true}
                  decelerationRate={0}
-                 snapToInterval={width}
+                 snapToInterval={width - 40}
                  snapToAlignment={"center"}
                  contentInset={{
                    top: 0,
@@ -56,7 +125,7 @@ export class ExpandableView extends Component {
                    bottom: 0,
                    right: 20,
                  }}>
-                    { item.options && item.options.map(option => (
+                    { item && item.options && item.options.map(option => (
                         <Card type={ item.key } data={option} />
                     ))}
                 </ScrollView>

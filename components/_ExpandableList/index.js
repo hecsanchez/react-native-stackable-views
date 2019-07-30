@@ -11,7 +11,6 @@ import { ExpandableListTheme } from 'app/styled';
 export class ExpandableList extends React.Component {
     constructor(props) {
         super(props);
-        console.log('props', props);
         if (Platform.OS === 'android') {
           UIManager.setLayoutAnimationEnabledExperimental(true);
         }
@@ -26,17 +25,16 @@ export class ExpandableList extends React.Component {
       }
 
       setData = (data) => {
-          console.log('setting data');
-        const items = data.map(item => {
+        const items = data.map((item, index) => {
+          console.log('index', index);
             const setItem = Object.assign({}, item);
-            setItem.isExpanded = false;
+            setItem.isExpanded = index === 0;
             return setItem;
         });
         return items;
       }
     
       updateLayout = index => {
-          console.log("index", index);
         LayoutAnimation.configureNext(LayoutAnimation.Presets.easeInEaseOut);
         const array = [...this.state.items];
         array.map((value, placeindex) =>
@@ -49,18 +47,25 @@ export class ExpandableList extends React.Component {
       };
     
       render() {
-          const { items } = this.state;
+        const { items } = this.state;
+        const { onSettingsPress, total } = this.props;
+        
         return (
           <View>
             <ExpandableListTheme>
                 {items && items.map((item, key) => (
                     <ExpandableView
-                        key={item.category_name}
                         onToggle={this.updateLayout.bind(this, key)}
                         item={item}
                         index={key}
+                        onSettingsPress={onSettingsPress}
                     />
                 ))}
+                <ExpandableView
+                    total={total}
+                    onToggle={this.updateLayout.bind(this, 3)}
+                    index={3}
+                />
             </ExpandableListTheme>
           </View>
         );

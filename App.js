@@ -8,9 +8,12 @@ export default class App extends React.Component {
 
   render() {
     return (
-      <SafeAreaView>
-        <Home></Home>
-      </SafeAreaView>
+      <>
+        <SafeAreaView style={{ backgroundColor: '#5acbcb'}}/>
+        <SafeAreaView style={{ backgroundColor: '#ffffff'}}>
+          <Home></Home>
+        </SafeAreaView>
+      </>
     );
   }
 };
