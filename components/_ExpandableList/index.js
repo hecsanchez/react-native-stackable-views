@@ -49,8 +49,8 @@ export class ExpandableList extends React.Component {
     
       render() {
         const { items } = this.state;
-        const { onSettingsPress, total, onSelect } = this.props;
-        
+        const { onSettingsPress, total, onSelect, selectedCards } = this.props;
+        console.log('this.state.items', this.state.items);
         return (
           <View>
             <ExpandableListTheme>
@@ -61,6 +61,7 @@ export class ExpandableList extends React.Component {
                         item={item}
                         index={key}
                         onSettingsPress={onSettingsPress}
+                        selectedCards={selectedCards}
                     />
                 ))}
                 <ExpandableView

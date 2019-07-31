@@ -5,7 +5,13 @@ export const Row = styled.View`
     flex-direction: row;
 `;
 
+export const BottomRow = styled.View`
+    display: flex;
+    flex-direction: row;
+    margin-top: 50px;
+`;
+
 export const Column = styled.View`
    width: ${props=>props.width ? props.width : '100'}%;
-   text-align: ${props=>props.alignText ? props.alignText : 'left'};
+   align-items: ${props=>props.alignText ? props.alignText : 'flex-start'};
 `;

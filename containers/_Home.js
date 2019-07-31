@@ -27,21 +27,20 @@ import {
 export class Home extends React.Component {
     constructor() {
         super();
-        
+
         this.state = {
             isModalVisible: false,
             isBookmarked: false,
-            selectedCards: {
-                hotel: '',
-                car: '',
-                flight: ''
-            }
+            selectedCards: null
         };
     }
 
     async componentDidMount() {
-        const value = await AsyncStorage.getItem('selectedCards');
-        console.log('value', value);
+        const storage = await AsyncStorage.getItem('selectedCards');
+        const selectedCards = JSON.parse(storage);
+        this.setState({
+            selectedCards
+       });
     }
 
     toggleModal = (show) => {
@@ -54,28 +53,21 @@ export class Home extends React.Component {
         }));
     }
 
-    setSelectedCards = () => {
-        const options = itinerary.sections.map(section=>{
-            const filteredSection = Object.assign({}, section);
-            filteredSection.type = section.key;
-            return section.options;
-        });
-
-        options.filter(option=>{
-
-        });
-
-    }
-
     onSelect = async(id, type) => {
+        this.setState({ isReady: false });
+
         const newSelection = {
             ...this.state.selectedCards,
             [type]: id,
         };
-        this.setState({ selectedCards: newSelection});
-        await AsyncStorage.setItem('selectedCards', newSelection);
+
+        await AsyncStorage.setItem('selectedCards', JSON.stringify(newSelection));
+
+        this.setState({ 
+            selectedCards: newSelection
+        });
     }
-    
+
     render() {
         return (
             <>
@@ -104,12 +96,17 @@ export class Home extends React.Component {
                             </Column>
                         </Row>                        
                     </HeaderIntroTheme>
-                    <ExpandableList 
-                        total={itinerary.total}
-                        data={itinerary.sections}
-                        onSettingsPress={this.toggleModal}
-                        onSelect={this.onSelect}
-                    />
+                    { this.state.selectedCards &&
+                        <ExpandableList 
+                            total={itinerary.total}
+                            data={itinerary.sections}
+                            onSettingsPress={this.toggleModal}
+                            onSelect={this.onSelect}
+                            selectedCards={this.state.selectedCards}
+                            isReady={this.state.isReady}
+                        />
+                    }
+                    
                 </HomeTheme>
                 <Modal
                     animationType="slide"

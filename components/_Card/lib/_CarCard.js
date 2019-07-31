@@ -18,7 +18,11 @@ import {
 
 export const CarCard = (props) => {
     return(
-        <CardTheme onPress={()=>props.onSelect(props.id, 'car')} isSelected={props.isSelected}>
+        <CardTheme 
+            onPress={()=>props.onSelect(props.id, 'car')}
+            isSelected={props.isSelected}
+            onLayout={(e)=>props.isPreviouslySelected(e, 'flight')} 
+            >
             <CardImage
                 source={{uri: props.image}}
             />
@@ -41,7 +45,7 @@ export const CarCard = (props) => {
                             Pickup: {props.pickUp}
                         </SmallText>
                     </Column>
-                    <Column width={40} alignText="right">
+                    <Column width={40} alignText="flex-end">
                         
                     </Column>
                 </Row>

@@ -1,13 +1,8 @@
 import React, { Component } from 'react';
 import {
-  LayoutAnimation,
-  View,
   Text,
   ScrollView,
-  UIManager,
-  TouchableOpacity,
   Dimensions,
-  Button
 } from 'react-native';
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { 
@@ -18,9 +13,11 @@ import {
   Row,
   Column,
   IconContainer,
-  Filter
+  Filter,
+  MediumBoldText
 } from 'app/styled';
 import { Card } from 'app/components';
+
 const { width, height } = Dimensions.get('window');
 const contentHeight = height - 380;
 
@@ -30,13 +27,16 @@ export class ExpandableView extends Component {
     super();
     this.state = {
       height: 0,
+      yPos: 0
     };
+    this.scrollViewRef;
   }
 
   componentDidMount() {
     if (this.props.item && this.props.item.isExpanded) {
       this.setState({ height: height - 380 });
     }
+    
   }
 
   componentWillReceiveProps(nextProps) {
@@ -71,7 +71,7 @@ export class ExpandableView extends Component {
           <Column width={20}>
             <Text>C${item && item.price}</Text>
           </Column>
-          <Column width={10} alignText="right">
+          <Column width={10} alignText="flex-end">
             <IconContainer
               onPress={()=>onSettingsPress(true)}
             >
@@ -83,12 +83,12 @@ export class ExpandableView extends Component {
         <>
           <Column width={5}></Column>
           <Column width={65}>
-            <Text>Trip Overview</Text>
+            <MediumBoldText>Trip Overview</MediumBoldText>
           </Column>
           <Column width={20}>
-            <Text>C${total}</Text>
+            <MediumBoldText>C${total}</MediumBoldText>
           </Column>
-          <Column width={10} alignText="right">
+          <Column width={10} alignText="flex-end">
           </Column>
         </>
       }
@@ -114,32 +114,55 @@ export class ExpandableView extends Component {
     );
   }
 
-  renderContent = () => {
-    const { item, onSelect } = this.props;
+  setScrollViewRef = (element) => {
+    console.log("element", element);
+    this.scrollViewRef = element;
+  };
 
+  scrollToCard = (layout) => {
+      console.log('height:', layout.height);
+      console.log('width:', layout.width);
+      console.log('x:', layout.x);
+      console.log('y:', layout.y);
+      console.log('this.scrollViewRef', this.scrollViewRef);
+      this.scrollViewRef.scrollTo({x: layout.x, y: 0, animated: true});
+  }
+
+  renderContent = () => {
+    const { item, onSelect, selectedCards } = this.props;
+    console.log('item', item);
     return (
-      <ScrollView 
-        onMomentumScrollEnd={this.onScroll}
-        horizontal= {true}
-        decelerationRate={0}
-        snapToInterval={width - 40}
-        snapToAlignment={"center"}
-        contentInset={{
-          top: 0,
-          left: 0,
-          bottom: 0,
-          right: 20,
-        }}
-      >
-        { item && item.options && item.options.map(option => (
-            <Card type={ item.key } data={option} onSelect={onSelect}/>
-        ))}
-      </ScrollView>
+      <>
+        <ScrollView 
+          ref={this.setScrollViewRef}
+          onMomentumScrollEnd={this.onScroll}
+          horizontal= {true}
+          decelerationRate={0}
+          snapToInterval={width - 40}
+          snapToAlignment={"center"}
+          contentInset={{
+            top: 0,
+            left: 0,
+            bottom: 0,
+            right: 20,
+          }}
+        >
+          { item && item.options && item.options.map(option => (
+            <Card 
+              type={ item.key } 
+              data={option} 
+              onSelect={onSelect} 
+              selectedCards={selectedCards}
+              scrollToCard={this.scrollToCard}
+              />
+          ))}
+        </ScrollView>
+      </>
     );
   }
 
   render() {
-    const { item, index } = this.props;
+    const { item, index, isReady } = this.props;
 
     return (
         <ExpandableViewTheme>

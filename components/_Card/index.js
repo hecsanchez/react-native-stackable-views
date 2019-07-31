@@ -7,23 +7,31 @@ import { FlightCard, CarCard, HotelCard } from './lib';
 
 export const Card = (props) => {
     const isSelected = () => {
-        console.log('props', props);
-        if (props.data) {
-            // props.data.filter(option=> {
-            //     console.log('option', option);
-            //     return true;
-            // });
+        if (props.selectedCards) {
+            const isSelected = Object.keys(props.selectedCards)
+                .filter(key => {
+                    console.log('props.selectedCards[key]', props.selectedCards[key]);
+                    console.log('props.data.id', props.data.id);
+                    return props.selectedCards[key] === props.data.id;
+                }).length > 0;
+            return isSelected;
         }
-        return true;
+        return false;
+    };
+
+    isPreviouslySelected = (e) => {
+        if (isSelected()) {
+            props.scrollToCard(e.nativeEvent.layout);
+        }
     };
 
     switch(props.type) {
         case 'flight':
-            return <FlightCard {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
+            return <FlightCard isPreviouslySelected={isPreviouslySelected} {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
         case 'car':
-            return <CarCard {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
+            return <CarCard isPreviouslySelected={isPreviouslySelected} {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
         case 'hotel':
-            return <HotelCard {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
+            return <HotelCard isPreviouslySelected={isPreviouslySelected} {...props.data} onSelect={props.onSelect} isSelected={isSelected()}/>;
         default:
             return;
     }

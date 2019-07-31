@@ -15,9 +15,12 @@ export const itinerary = {
                 filters: ['Airlines', 'Stops', 'Time in', 'Time out'],
                 options: [
                     {
-                        outboud: {
-                            departure: 'Jul 24 2019 20:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 22:12:00 GMT-0600 (Central Standard Time)',
+                        id: '2435',
+                        outbound: {
+                            departureDate: '24 July',
+                            departureTime: '20:00',
+                            arrivalDate: '24 July',
+                            arrivalTime: '22:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: [
@@ -27,23 +30,30 @@ export const itinerary = {
                             ],
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         },
                         inbound: {
-                            departure: 'Jul 29 2019 19:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 21:12:00 GMT-0600 (Central Standard Time)',
+                            departureDate: '29 July',
+                            departureTime: '19:00',
+                            arrivalDate: '29 July',
+                            arrivalTime: '21:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: null,
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         }
                     },
                     {
-                        outboud: {
-                            departure: 'Jul 24 2019 20:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 22:12:00 GMT-0600 (Central Standard Time)',
+                        id: '2153',
+                        outbound: {
+                            departureDate: '24 July',
+                            departureTime: '20:00',
+                            arrivalDate: '24 July',
+                            arrivalTime: '22:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: [
@@ -53,23 +63,30 @@ export const itinerary = {
                             ],
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         },
                         inbound: {
-                            departure: 'Jul 29 2019 19:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 21:12:00 GMT-0600 (Central Standard Time)',
+                            departureDate: '29 July',
+                            departureTime: '19:00',
+                            arrivalDate: '29 July',
+                            arrivalTime: '21:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: null,
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         }
                     },
                     {
-                        outboud: {
-                            departure: 'Jul 24 2019 20:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 22:12:00 GMT-0600 (Central Standard Time)',
+                        id: '4354',
+                        outbound: {
+                            departureDate: '24 July',
+                            departureTime: '20:00',
+                            arrivalDate: '24 July',
+                            arrivalTime: '22:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: [
@@ -79,17 +96,21 @@ export const itinerary = {
                             ],
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         },
                         inbound: {
-                            departure: 'Jul 29 2019 19:00:00 GMT-0600 (Central Standard Time)',
-                            arrival: 'Jul 24 2019 21:12:00 GMT-0600 (Central Standard Time)',
+                            departureDate: '29 July',
+                            departureTime: '19:00',
+                            arrivalDate: '29 July',
+                            arrivalTime: '21:12',
                             origin: 'YYZ',
                             destination: 'YYC',
                             stops: null,
                             length: '4h 12m',
                             airline: 'Westjet',
-                            price: '163'
+                            price: '163',
+                            airlineLogo: 'https://media.licdn.com/dms/image/C4E0BAQHY0EW-U-1I3Q/company-logo_200_200/0?e=2159024400&v=beta&t=WHCTOTyzNbw0_2viuA31MFXn6MohC3WwAuN_18wK1oA'
                         }
                     }
                 ]
@@ -102,19 +123,31 @@ export const itinerary = {
             filters: ['Name', 'Price', 'Type', 'Location'],
             options: [
                 {
+                    id: '9284',
                     name: 'Alt Hotel Calgary East Village',
-                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg'
-
+                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg',
+                    partnerType: 'Event Partner',
+                    dealType: 'Exclusive Deal',
+                    distanceToDestination: '5 minutes walk',
+                    price: 163
                 },
                 {
-                    name: 'Alt Hotel Calgary East Village',
-                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg'
-
+                    id: '8234',
+                    name: 'Alt Hotel Calgary East Village 2',
+                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg',
+                    partnerType: 'Event Partner',
+                    dealType: 'Exclusive Deal',
+                    distanceToDestination: '5 minutes walk',
+                    price: 163
                 },
                 {
-                    name: 'Alt Hotel Calgary East Village',
-                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg'
-
+                    id: '4385',
+                    name: 'Alt Hotel Calgary East Village 3',
+                    image: 'https://media-cdn.tripadvisor.com/media/photo-s/15/d0/a2/1d/exterior-of-the-hotel.jpg',
+                    partnerType: 'Event Partner',
+                    dealType: 'Exclusive Deal',
+                    distanceToDestination: '5 minutes walk',
+                    price: 163
                 }
             ],
         },
@@ -126,6 +159,7 @@ export const itinerary = {
             filters: ['Supplier', 'Price', 'Type', 'Pick up', 'Drop off'],
             options: [
                 {
+                    id: '7482',
                     name: 'Kia Rio',
                     type: 'Economy',
                     seats: 4,
@@ -140,6 +174,7 @@ export const itinerary = {
                     image: 'https://media.wired.com/photos/5933335ed80dd005b42b15f2/master/w_582,c_limit/Kia-Rio-1.jpg'
                 },
                 {
+                    id: '6534',
                     name: 'Honda Fit',
                     type: 'Economy',
                     seats: 4,
@@ -154,6 +189,7 @@ export const itinerary = {
                     image: 'https://images.autotrader.com/scaler/620/420/cms/images/cars/honda/fit/2015/2015hondafitvs2015kiario/239940.jpg'
                 },
                 {
+                    id: '5209',
                     name: 'Honda Fit',
                     type: 'Economy',
                     seats: 4,

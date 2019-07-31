@@ -32,11 +32,11 @@ export const MainSubtitle = styled.Text`
 `;
 
 export const Filter = styled.Text`
-    margin: 0 5px;
+    margin: 0 3px;
     background-color: ${props=>props.index !== 2 ? '#ecf8f5' : "#ffffff"};
     color: ${props=>props.index !== 2 ? '#6ec4ca' : "#78c7cc"};
     padding: 5px 10px;
-    border-radius: 15px;
+    border-radius: 10px;
     text-align: center;
     font-size: 11px;
 `;
